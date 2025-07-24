@@ -141,3 +141,23 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java
+
+
+# IntelliJ 관련
+.idea/
+*.iml
+
+# 빌드 결과물
+/out/
+target/
+bin/
+
+# OS별 불필요한 파일
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+*.log
+
+# 기타 캐시나 임시 파일
+*.class
