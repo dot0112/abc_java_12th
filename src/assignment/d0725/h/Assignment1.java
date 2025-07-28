@@ -1,4 +1,4 @@
-package assignment.d0725;
+package assignment.d0725.h;
 
 import java.util.Scanner;
 
@@ -6,8 +6,8 @@ public class Assignment1 {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
-        int kg, m;
-        double bmi;
+        int kg;
+        double bmi, m;
         String bmiStatus;
 
         System.out.printf("\n\uD83D\uDCA1 BMI 계산식:\n" +
@@ -21,9 +21,9 @@ public class Assignment1 {
         System.out.print("체중을 입력하세요 (kg단위) : ");
         kg = s.nextInt();
         System.out.print("신장을 입력하세요 (cm단위) : ");
-        m = s.nextInt();
+        m = s.nextInt() / 100.0;
 
-        bmi = kg * 10000.0 / (m * m);
+        bmi = kg / (m * m);
 
         if (bmi < 18.5) bmiStatus = "저체중";
         else if (bmi < 23) bmiStatus = "정상";
