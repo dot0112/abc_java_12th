@@ -1,0 +1,126 @@
+package assignment.d0729.h;
+
+import java.util.Scanner;
+
+public class Assignment1 {
+    static Scanner s = new Scanner(System.in);
+
+    static void leafYear() {
+        System.out.print("\n태어난 해가 윤년인지 확인하여 결과를 출력하세요\n태어난 해를 입력해주세요: ");
+        int year = s.nextInt();
+
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) System.out.println("윤년입니다");
+        else System.out.println("평년입니다");
+    }
+
+    static void bmiCalculator() {
+        int kg;
+        double bmi, m;
+        String bmiStatus;
+
+        System.out.printf("\n\uD83D\uDCA1 BMI 계산식:\n" +
+                "BMI = 체중(kg) / (신장(m) * 신장(m))\n" +
+                "\uD83D\uDCA1 판정 기준\n" +
+                "BMI < 18.5: 저체중\n" +
+                "18.5 ≤ BMI < 23: 정상\n" +
+                "23 ≤ BMI < 25: 과체중\n" +
+                "25 이상: 비만\n\n");
+
+        System.out.print("체중을 입력하세요 (kg단위) : ");
+        kg = s.nextInt();
+        System.out.print("신장을 입력하세요 (cm단위) : ");
+        m = s.nextInt() / 100.0;
+
+        bmi = kg / (m * m);
+
+        if (bmi < 18.5) bmiStatus = "저체중";
+        else if (bmi < 23) bmiStatus = "정상";
+        else if (bmi < 25) bmiStatus = "과체중";
+        else bmiStatus = "비만";
+
+        System.out.printf("당신의 BMI는 %7.2f이며, '%s'입니다.\n", bmi, bmiStatus);
+    }
+
+    static void calculator() {
+        int lhs, rhs;
+        char op;
+        String oFormat = "결과: ";
+
+        System.out.print("\n첫 번재 숫자: ");
+        lhs = s.nextInt();
+        System.out.print("두 번재 숫자: ");
+        rhs = s.nextInt();
+        System.out.print("연산 기호를 입력하세요: ");
+        op = s.next().charAt(0);
+
+        Object result = switch (op) {
+            case '+' -> {
+                oFormat += "%d";
+                yield lhs + rhs;
+            }
+            case '-' -> {
+                oFormat += "%d";
+                yield lhs - rhs;
+            }
+            case '*' -> {
+                oFormat += "%d";
+                yield lhs * rhs;
+            }
+            case '/' -> {
+                if (rhs == 0) {
+                    oFormat = "0으로 나눌 수 없습니다.";
+                    yield null;
+                } else {
+                    oFormat += "%.2f";
+                    yield lhs / (double) rhs;
+                }
+            }
+            default -> {
+                oFormat = "지원하지 않는 연산입니다.";
+                yield null;
+            }
+        };
+
+        System.out.printf(oFormat + '\n', result);
+    }
+
+    static void multiplycation() {
+        int dan, times;
+        for (dan = 2; dan <= 9; dan++) {    // 1단부터 9단까지 반복하는 외부 반복문
+            for (times = 1; times <= 9; times++)    // 각 단에서 1~9를 곱하는 내부 반복문
+                System.out.println(dan + " X " + times + " = " + (dan * times));
+            System.out.println("-----------------------");  // 각 단 사이 구분
+        }
+    }
+
+    static void accumulate() {
+        int sum, i, n = -1;
+
+        System.out.println();
+        for (sum = 0, i = 1; n != 0; ) {
+            System.out.printf("정수%d 입력: ", i++);
+            n = s.nextInt();
+            sum += n;
+        }
+        System.out.printf("합계: %d\n", sum);
+
+    }
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.print("\n------------------------------------\n" +
+                    "1: 윤년계산기, 2: bmi계산기, 3: 사칙연산 계산기, 4: 구구단, 5: 누산합 계산기 (0: 종료)\n" +
+                    "번호 입력: ");
+            int n = s.nextInt();
+            if (n == 0) break;
+            switch (n) {
+                case 1 -> leafYear();
+                case 2 -> bmiCalculator();
+                case 3 -> calculator();
+                case 4 -> multiplycation();
+                case 5 -> accumulate();
+            }
+        }
+        s.close();
+    }
+}
