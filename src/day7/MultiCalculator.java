@@ -1,8 +1,8 @@
-package assignment.d0729.h;
+package day7;
 
 import java.util.Scanner;
 
-public class Assignment1 {
+public class MultiCalculator {
     static Scanner s = new Scanner(System.in);
 
     static void leapYear() {
@@ -110,18 +110,22 @@ public class Assignment1 {
 
     }
 
+    static void printMenu() {
+        System.out.print("""
+                
+                [선택 항목]
+                1: 윤년 계산기
+                2: bmi 계산기
+                3: 사칙연산 계산기
+                4: 구구단
+                5: 누산합 계산기
+                0: 종료
+                번호 입력:\s""");
+    }
+
     public static void main(String[] args) {
         while (true) {
-            System.out.print("""
-                    
-                    [선택 항목]
-                    1: 윤년계산기
-                    2: bmi계산기
-                    3: 사칙연산 계산기
-                    4: 구구단
-                    5: 누산합 계산기 
-                    0: 종료
-                    번호 입력:\s""");
+            printMenu();
             int n = s.nextInt();
             if (n == 0) break;
             switch (n) {
