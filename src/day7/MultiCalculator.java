@@ -213,6 +213,11 @@ public class MultiCalculator {
                 번호 입력:\s""");
     }
 
+    /**
+     * 프로그램 진입점
+     *
+     * @param args 실행 인자
+     */
     public static void main(String[] args) {
         while (true) {
             printMenu();
