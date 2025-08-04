@@ -17,13 +17,17 @@ public class Main {
         // 인스턴스 = 실제 요리
         Ramen spicyRamen = new Ramen("매운라면", "가루스프");
 
+        Ramen mildRamen = new Ramen("안매운라면", "액상스프");
+
+        spicyRamen = mildRamen;
+
         // 조리 시작
         spicyRamen.cook();
-        System.out.println(spicyRamen.isCooked);
+        System.out.println(spicyRamen.getClass());
         System.out.println(spicyRamen);
 
         System.out.println();
-        
+
         Bibimbap bibimbap = new Bibimbap(new String[]{"당근", "표고", "콩나물", "고사리"});
         bibimbap.cook();
         System.out.println(bibimbap.isCooked);

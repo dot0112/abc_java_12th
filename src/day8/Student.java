@@ -6,7 +6,8 @@ public class Student {
     필드, 멤버변수: 객체의 상태 (객체가 아는 것)
     메서드: 객체의 동작, 기능
     */
-    String name, phone;
+    public String name;
+    String phone;
     int math, eng, kor;
 
     void goSchool() {
