@@ -174,25 +174,45 @@ public class Assignment1 {
 
         System.out.printf("평균:\t%.2f\n", avg);
 
-        System.out.printf("등급:\t%c\n", whatGrade((int) avg));
+        System.out.printf("등급:\t%c\n", Student.whatGrade((int) avg));
 
         System.out.println();
     }
 
     /**
-     * 성적에 대해 등급을 반환하는 메서드
-     *
-     * @param score 점수
-     * @return char 형의 등급 값
+     * 학생 3명의 이름과 주소, 성적을 입력받고
+     * 각 학생의 평균과 등급을 출력하는 메서드
      */
-    public static char whatGrade(int score) {
-        return switch (score / 10) {
-            case 10, 9 -> 'A';
-            case 8 -> 'B';
-            case 7 -> 'C';
-            case 6 -> 'D';
-            default -> 'F';
-        };
+    public static void gradeCal2() {
+        Student[] students = new Student[3];
+
+        for (int i = 0; i < 3; i++) {
+            String name, address;
+            int[] scores = new int[3];
+
+            System.out.print("\n학생의 이름을 입력하세요: ");
+            name = s.next();
+            System.out.print("학생의 주소을 입력하세요: ");
+            s.nextLine();
+            address = s.nextLine().trim();
+            System.out.print("성적을 입력하세요 (국어, 영어, 수학): ");
+            for (int j = 0; j < 3; j++) {
+                scores[j] = s.nextInt();
+            }
+
+            students[i] = new StudentBuilder(name)
+                    .address(address)
+                    .scores(scores)
+                    .buildStudent();
+        }
+
+        System.out.println();
+        for (int i = 0; i < 3; i++) {
+            students[i].calGrade();
+            System.out.printf("학생 [%s]의 평균은 [%.2f]이고 등급은 [%c]입니다.\n",
+                    students[i].getStudentName(), students[i].getAvg(), students[i].getGrade());
+        }
+        System.out.println();
     }
 
     /**
@@ -209,6 +229,7 @@ public class Assignment1 {
                 5: 누산합 계산기
                 6: 띠 계산기
                 7: 성적 계산기
+                8: 성적 계산기 2
                 0: 종료
                 번호 입력:\s""");
     }
@@ -226,6 +247,7 @@ public class Assignment1 {
                 case 5 -> accumulate();
                 case 6 -> chineseZodiac();
                 case 7 -> gradeCal();
+                case 8 -> gradeCal2();
             }
         }
         s.close();

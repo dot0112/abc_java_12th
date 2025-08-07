@@ -1,7 +1,7 @@
 package day1;
 
 public class Variable {
-    public static void main(String[] argv){
+    public static void main(String[] argv) {
         // 변수란? 값을 담는 상자
         // 값이란? 메모리에 저장된 데이터 조각
 
