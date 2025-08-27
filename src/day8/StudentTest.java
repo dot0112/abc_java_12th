@@ -2,6 +2,7 @@ package day8;
 
 public class StudentTest {
     Student kim = new Student();
+    static Student s1 = new Student(), s2 = new Student(), s3;
 
     public static void main(String[] args) {
         Student kim = new Student();
@@ -13,5 +14,10 @@ public class StudentTest {
         System.out.println(kim.math);
 
         kim.goSchool();
+
+
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
     }
 }

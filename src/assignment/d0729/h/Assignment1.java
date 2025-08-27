@@ -186,33 +186,83 @@ public class Assignment1 {
     public static void gradeCal2() {
         Student[] students = new Student[3];
 
-        for (int i = 0; i < 3; i++) {
-            String name, address;
-            int[] scores = new int[3];
-
-            System.out.print("\n학생의 이름을 입력하세요: ");
-            name = s.next();
-            System.out.print("학생의 주소을 입력하세요: ");
-            s.nextLine();
-            address = s.nextLine().trim();
-            System.out.print("성적을 입력하세요 (국어, 영어, 수학): ");
-            for (int j = 0; j < 3; j++) {
-                scores[j] = s.nextInt();
+        while (true) {
+            printMenuGradeCal2();
+            int f = s.nextInt();
+            switch (f) {
+                case 0 -> getAllGrade(students);
+                case 1 -> printAllGrade(students);
+                case 2 -> editScore(students);
+                case 3 -> {
+                    return;
+                }
             }
-
-            students[i] = new StudentBuilder(name)
-                    .address(address)
-                    .scores(scores)
-                    .buildStudent();
         }
 
-        System.out.println();
-        for (int i = 0; i < 3; i++) {
-            students[i].calGrade();
-            System.out.printf("학생 [%s]의 평균은 [%.2f]이고 등급은 [%c]입니다.\n",
-                    students[i].getStudentName(), students[i].getAvg(), students[i].getGrade());
+    }
+
+    static void printMenuGradeCal2() {
+        System.out.print("""
+                
+                === 성적 계산기 2 ===
+                [0] 모든 학생 정보 입력
+                [1] 모든 학생 정보 출력
+                [2] 선택 학생 정보 수정
+                [3] 계산기 종료
+                번호 선택:\s""");
+    }
+
+    static void getAllGrade(Student[] students) {
+        try {
+            for (int i = 0; i < students.length; i++) {
+                String name, address;
+
+                System.out.print("\n학생의 이름을 입력하세요: ");
+                name = s.next();
+                System.out.print("학생의 주소을 입력하세요: ");
+                s.nextLine();
+                address = s.nextLine().trim();
+
+                students[i] = new StudentBuilder(name)
+                        .address(address)
+                        .scores(Student.inputScores(s))
+                        .buildStudent();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("전체 학생 정보를 먼저 입력해야합니다. (메뉴: 0)");
         }
-        System.out.println();
+    }
+
+    static void printAllGrade(Student[] students) {
+        try {
+            System.out.println();
+            for (Student student : students) {
+                student.calGrade();
+                student.printGrade();
+            }
+            System.out.println();
+        } catch (NullPointerException e) {
+            System.out.println("전체 학생 정보를 먼저 입력해야합니다. (메뉴: 0)");
+        }
+    }
+
+    static void editScore(Student[] students) {
+        try {
+            System.out.print("\n이름\t국어\t영어\t수학\n");
+            for (Student stu : students) {
+                stu.printScores();
+            }
+            System.out.printf("\n점수를 변경할 학생을 선택하세요(0 ~ %d): ", students.length - 1);
+            int num = s.nextInt();
+
+            students[num].setScores(Student.inputScores(s));
+
+            System.out.print("\n=== 변경 내역 ===\n이름\t국어\t영어\t수학\n");
+            students[num].printScores();
+
+        } catch (NullPointerException e) {
+            System.out.println("전체 학생 정보를 먼저 입력해야합니다. (메뉴: 0)");
+        }
     }
 
     /**

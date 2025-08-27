@@ -1,4 +1,4 @@
-package assignment.d0729.h;
+package studentReport;
 
 import java.util.Scanner;
 
@@ -10,25 +10,16 @@ public class Student {
     private int[] scores;
     private char grade;
     private double avg;
-    private String studentName, address;
+    private final String studentName, address;
 
-    Student() {
-    }
-
-    Student(String studentName, int[] scores, String addreass) {
-        setStudentId();
+    Student(String studentName, int[] scores, String address) {
         this.studentId = serialId++;
         this.studentName = studentName;
         this.scores = scores;
-        this.address = addreass;
-        this.avg = 0;
+        this.address = address;
     }
 
     // 메서드: 객체가 할 수 있는 것, 동작
-
-    private void setStudentId() {
-        this.studentId = serialId++;
-    }
 
     public void calGrade() {
         int sum = 0;
@@ -36,10 +27,10 @@ public class Student {
             sum += score;
         }
         this.avg = (double) sum / scores.length;
-        this.grade = whatGrade((int) this.avg);
+        this.grade = setGrade((int) this.avg);
     }
 
-    public static char whatGrade(int score) {
+    public static char setGrade(int score) {
         return switch (score / 10) {
             case 10, 9 -> 'A';
             case 8 -> 'B';
@@ -62,34 +53,6 @@ public class Student {
         this.scores = scores;
     }
 
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public char getGrade() {
-        return grade;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public static int getSerialId() {
-        return serialId;
-    }
-
-    public int[] getScores() {
-        return scores;
-    }
-
-    public double getAvg() {
-        return avg;
-    }
-
     public void printScores() {
         System.out.printf("%s\t%d\t%d\t%d\n",
                 studentName,
@@ -99,7 +62,8 @@ public class Student {
     }
 
     public void printGrade() {
-        System.out.printf("학생 [%s]의 평균은 [%.2f]이고 등급은 [%c]입니다.\n",
-                studentName, avg, grade);
+        calGrade();
+        System.out.printf("학생 [%s, %d]의 평균은 [%.2f]이고 등급은 [%c]입니다.\n",
+                studentName, studentId, avg, grade);
     }
 }
